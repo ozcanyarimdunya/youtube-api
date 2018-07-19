@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<p id="result">Hello World</p>
+<script>
+    (() => {
+        fetch('/videos/', {
+            method: 'POST',
+            body: JSON.stringify({
+                type: "video",
+                q: 'hadise',
+                maxResults: 12,
+                part: 'snippet'
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                let html = data.items.map(item => {
+                    return `<div>
+                                <span>etag: ${item.etag}</span> <br><br>
+                                <span>regionCode: ${item.regionCode}</span> <br><br>
+                                <span>kind: ${item.kind}</span> <br><br>
+                                <span>kind: ${item.id.kind} | videoId: ${item.id.videoId}</span> <br><br>
+                                <span>channelId: ${item.snippet.channelId}</span> <br><br>
+                                <span>channelTitle: ${item.snippet.channelTitle}</span> <br><br>
+                                <span>description: ${item.snippet.description}</span> <br><br>
+                                <span>publishedAt: ${item.snippet.publishedAt}</span> <br><br>
+                                <span>
+                                    <strong>thumbnails</strong>
+                                    <img src="${item.snippet.thumbnails.default.url}"
+                                         height="item.snippet.thumbnails.default.height"
+                                         width="item.snippet.thumbnails.default.width"/>
+                                </span>
+                           </div>`
+                });
+                document.getElementById("result").innerHTML = html;
+            })
+            .catch(error => console.log(error))
+    })();
+</script>
+</body>
+</html>
