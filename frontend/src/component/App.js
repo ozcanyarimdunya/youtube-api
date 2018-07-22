@@ -4,6 +4,7 @@ import './App.css';
 
 import {Layout, Icon} from 'antd';
 import LeftMenu from "./LeftMenu";
+import Task from "./Task";
 
 const {Header, Content, Footer} = Layout;
 
@@ -31,6 +32,7 @@ class App extends Component {
                         />
                     </Header>
                     <Content className="content">
+                        <Task/>
                     </Content>
                     <Footer>
                         @Copyright

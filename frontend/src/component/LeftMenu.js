@@ -5,11 +5,6 @@ import {Layout} from "antd/lib/index";
 const {Sider} = Layout;
 
 class LeftMenu extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const collapsed = this.props.collapsed;
 
